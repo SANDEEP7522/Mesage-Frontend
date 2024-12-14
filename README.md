@@ -19,3 +19,7 @@ Beautifully designed components that you can copy and paste into your apps. Made
   
  * read all document with a good way and follow them 
 -> (https://ui.shadcn.com/docs/installation/vite)
+
+# setup for eslint-plugin-simple-import-sort
+This is for those who use eslint --fix (autofix) a lot and want to completely forget about sorting imports!
+-> npm i eslint-plugin-simple-import-sort

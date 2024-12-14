@@ -3,6 +3,7 @@ import globals from 'globals'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
+import SimpleImportSort from 'eslint-plugin-simple-import-sort'
 
 export default [
   { ignores: ['dist'] },
@@ -20,10 +21,15 @@ export default [
     settings: { react: { version: '18.3' } },
     plugins: {
       react,
+      'simple-import-sort': SimpleImportSort,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
     rules: {
+      
+      'simple-import-sort/imports': 'error', // Enforce import sorting
+      'simple-import-sort/exports': 'error', // Enforce export sorting (optional)
+   
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
@@ -33,6 +39,9 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      "semi": ["error", "always"],
+      "quotes": ["error", "single"],
+      'react/prop-types': 'off'
     },
   },
 ]
