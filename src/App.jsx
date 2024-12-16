@@ -1,15 +1,15 @@
 
-import { useState } from "react";
+
 import "./App.css";
-import { Button } from "@/components/ui/button";
+import { Route, Routes } from "react-router-dom";
+import { Auth } from'./pages/Auth/Auth'
 
 function App() {
-  const [count, setCount] = useState(0);
-
+  
   return (
-    <div>
-      <Button>Click me</Button>
-    </div>
+    <Routes>
+      <Route path="/auth" element = {<Auth />}/>
+    </Routes>
   );
 }
 
