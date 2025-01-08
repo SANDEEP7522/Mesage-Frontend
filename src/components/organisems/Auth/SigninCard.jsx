@@ -10,8 +10,8 @@ export const SigninCard = () => {
      const navigate = useNavigate();
 
   const [signinForm, setSigninForm] = useState({
-     email: '',
-     password: '',
+     email:'',
+     password:'',
   
   })
 
