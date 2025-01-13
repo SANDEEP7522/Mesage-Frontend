@@ -7,6 +7,7 @@ import { SigninCard } from "@/components/organisems/Auth/SigninCard";
 import { NotFound } from "@/pages/NotFound/NotFound";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SignupContainer } from "@/components/organisems/Auth/SignupContainer";
+import { Toaster } from "@/components/ui/toaster";
 
 function App() {
 
@@ -21,6 +22,9 @@ function App() {
 
       <Route path="/*" element = {<NotFound />}/>
     </Routes>
+   
+    <Toaster />
+    
     </QueryClientProvider>
   );
 }
