@@ -7,7 +7,8 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { TriangleAlert } from "lucide-react";
+import { FaCheck } from 'react-icons/fa';
+import { LucideLoader2, TriangleAlert } from "lucide-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -16,8 +17,12 @@ export const SignupCard = ({
   setSignupForm,
   validationError,
   onSignupFormSubmit,
+  error,
+  isPending,
+  isSuccess,
 }) => {
   const navigate = useNavigate();
+  console.log(signupForm);
 
   return (
     <Card className="h-full w-full bg-blue-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border border-gray-100">
@@ -30,15 +35,44 @@ export const SignupCard = ({
             className="bg-destructive/15 p-4 rounded-md flex items-center gap-x-2 
            text-sm mb-6 text-destructive-foreground"
           >
-             <TriangleAlert size={20} className="text-red-700"/>
+            <TriangleAlert size={20} className="text-red-700" />
             <p className="text-red-500">{validationError.message}</p>
           </div>
         )}
 
-      
+        {error && (
+          <div
+            className="bg-destructive/15 p-4 rounded-md flex items-center gap-x-2 
+           text-sm mb-6 text-destructive-foreground"
+          >
+            <TriangleAlert size={20} className="text-red-700" />
+            <p className="text-red-500">{error.message}</p>
+          </div>
+        )}
+
+        {isSuccess && (
+          <div className="bg-destructive/15 p-4 rounded-md flex items-center gap-x-2 
+          text-sm mb-5 text-primary">
+            <p className="text-sm text-green-500 ">
+            <FaCheck size={20} className="text-green-600 "/>
+            Successfully sign up. You will be redirected to Signin Page few second
+            
+            <LucideLoader2 size={20} className="animate-spin ml-3" />
+          
+            </p>
+          </div>
+        )}
+
+{/* 
+         {isPending && (
+          <div>
+            <p className="text-center text-sm text-green-500" > Plese Wait....... </p>
+          </div>
+         )} */}
+
 
       </CardHeader>
-      <form className="space-y-5  m-6" onSubmit={onSignupFormSubmit} >
+      <form className="space-y-5  m-6" onSubmit={onSignupFormSubmit}>
         <Input
           placeholder="Email"
           required
@@ -47,7 +81,7 @@ export const SignupCard = ({
           }
           value={signupForm.email}
           type="email"
-          disabled={false}
+          disabled={isPending}
         />
         <Input
           placeholder="Password"
@@ -57,7 +91,7 @@ export const SignupCard = ({
           }
           value={signupForm.password}
           type="password"
-          disabled={false}
+          disabled={isPending}
         />
         <Input
           placeholder="Confirm Password"
@@ -67,17 +101,17 @@ export const SignupCard = ({
           }
           value={signupForm.confirmPassword}
           type="password"
-          disabled={false}
+          disabled={isPending}
         />
         <Input
-          placeholder="Enter user Name"
+          placeholder="username"
           required
           onChange={(e) =>
             setSignupForm({ ...signupForm, username: e.target.value })
           }
           value={signupForm.username}
           type="text"
-          disabled={false}
+          disabled={isPending}
         />
         <Button disabled={false} size="lg" type="submit" className="w-full">
           Continue
