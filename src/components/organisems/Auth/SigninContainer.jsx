@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { SigninCard } from "./SigninCard";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { useSignin } from '@/hooks/apis/auth/useSignin';
 
 export const SigninContainer = () => {
 
@@ -13,7 +15,7 @@ export const SigninContainer = () => {
 
   const navigate = useNavigate();
 
-  const [isPending, isSuccess, error, signinMutation] = useState();
+  const {isPending, isSuccess, error, signinMutation} = useSignin();
 
   const onSigninFormSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +28,8 @@ export const SigninContainer = () => {
       return;
     }
 
- 
+  
+    setValidationError(null);
 
     await signinMutation({
       email: signinForm.email,
