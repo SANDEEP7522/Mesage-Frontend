@@ -2,8 +2,8 @@ import { createContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
-// we want to get user details or Token directly then get
-export const AuthContextProvider = ({ Children }) => {
+// we want to get user details or Token from local stroge 
+export const AuthContextProvider = ({ children }) => {
   const [auth, setAuth] = useState({
      user: null,
      token: null
@@ -24,7 +24,7 @@ export const AuthContextProvider = ({ Children }) => {
 
   return (
      <AuthContext.Provider value={ { auth, setAuth } }>
-        {Children}
+        {children}
      </AuthContext.Provider>
    )
 };
