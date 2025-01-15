@@ -12,7 +12,7 @@ export const useCreateWorkspace = () => {
 
      const { isPending, isSuccess, error, mutateAsync: createWorkspaceMutation } =
           useMutation({
-               mutationFn: (data) => createWorkspacesRequest({ ...data, token: auth.token }),
+               mutationFn: (data) => createWorkspacesRequest({ ...data, token: auth?.token }),
                onSuccess: (data) => {
                     console.log('Successfully created workspace', data);
                     

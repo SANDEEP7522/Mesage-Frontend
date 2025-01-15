@@ -12,7 +12,7 @@ export const Home = () => {
    if(isFetching) return;
      console.log('Workspaces is downloded', workspaces);
     
-   if (workspaces.length === 0 || workspaces) {
+   if (workspaces.length === 0 || !workspaces) {
     console.log('No workspaces found, creating one ');
     
    } 

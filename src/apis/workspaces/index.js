@@ -2,7 +2,6 @@ import axios from "@/config/axiosConfig";
 
 export const createWorkspacesRequest = async ( { name, description, token } ) => {
      try {
-
           const response = await axios.post('/workspaces', { name, description}, {
                headers: {
                     'x-access-token': token
@@ -10,7 +9,7 @@ export const createWorkspacesRequest = async ( { name, description, token } ) =>
           });
           console.log('Response create in workspaces response', response);
           
-          return response?.data;
+          return response?.data?.data;
 
           
      } catch (error) {
