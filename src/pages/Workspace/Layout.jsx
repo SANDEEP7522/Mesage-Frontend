@@ -1,4 +1,5 @@
 import { WorkspaceNavbar } from "@/components/organisems/Workspace/WorkspaceNavebar";
+import { WorkspacePanel } from "@/components/organisems/Workspace/WorkspacePanel";
 import { WorkspaceSidebar } from "@/components/organisems/Workspace/WorkspaceSidebar";
 import {
   ResizableHandle,
@@ -23,7 +24,7 @@ export const WorkspaceLayout = ({ children }) => {
             minSize={11}
             className="bg-slack-medium"
           >
-            <div>Sidebar</div>
+            <WorkspacePanel />
           </ResizablePanel>
           <ResizableHandle withHandle />
           <ResizablePanel minSize={20}>{children}</ResizablePanel>
