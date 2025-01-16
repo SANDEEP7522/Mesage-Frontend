@@ -1,7 +1,8 @@
 import { UserButton } from "@/components/atoms/UserButton/UserButton";
 import { SidebarButton } from "@/components/molecules/SidebarButton/SidebarButton";
 import { BellIcon, HomeIcon, MessageSquareIcon, MoreHorizontalIcon } from "lucide-react";
-import { WorkspaceSwitcher } from "@/components/organisems/Workspace/WorkspaceSwitcher";
+import { WorkspaceSwitcher } from "./WorkspaceSwitcher";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export const WorkspaceSidebar = () => {
   return (
@@ -30,11 +31,18 @@ export const WorkspaceSidebar = () => {
         label="More"
       />
       
-      <div className="flex flex-col items-center justify-center mt-auto mb-5 gap-y-1">
-        
-        <UserButton />
-      
-      </div>
+      <div className="flex flex-col items-center justify-center mt-auto mb-5 gap-y-1">   
+      <TooltipProvider>
+         <Tooltip>
+            <TooltipTrigger>
+            <UserButton />
+            </TooltipTrigger>
+            <TooltipContent>
+               <p>User</p>
+            </TooltipContent>
+          </Tooltip>
+      </TooltipProvider>
+    </div>
     </aside>
   );
 };
