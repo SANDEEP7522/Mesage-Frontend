@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/hooks/context/useAuth";
 import { useWorkspacePreferencesModal } from "@/hooks/context/WorkspacePreferencesModalContext";
-import { useEffect } from "react";
 export const WorkspacePanelHeader = ({ workspace }) => {
   console.log("workspace is", workspace);
 
@@ -35,11 +34,8 @@ export const WorkspacePanelHeader = ({ workspace }) => {
     isLoggedInUserAdminOfWorkspace
   );
 
-  const { setOpenPreferences, openPreferences } = useWorkspacePreferencesModal();
-    useEffect(() => {
-        console.log('openPreferences is', openPreferences);
-    }, [openPreferences]);
-
+  const { setOpenPreferences, setInitialValue } = useWorkspacePreferencesModal();
+  
   return (
     <div className="flex items-center justify-between px-4 h-[50px] gap-0.5">
       <DropdownMenu>
@@ -65,7 +61,10 @@ export const WorkspacePanelHeader = ({ workspace }) => {
           {isLoggedInUserAdminOfWorkspace && (
             <>
               <DropdownMenuItem className="cursor-pointer py-2"
-                 onClick={() => setOpenPreferences(true)}
+                 onClick={() => {
+                  setInitialValue(workspace?.name);
+                  setOpenPreferences(true);
+                }}
               >
                 Preferences
               </DropdownMenuItem>
