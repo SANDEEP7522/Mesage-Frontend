@@ -16,8 +16,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/hooks/context/useAuth";
 import { useWorkspacePreferencesModal } from "@/hooks/context/WorkspacePreferencesModalContext";
+import { useEffect } from "react";
 export const WorkspacePanelHeader = ({ workspace }) => {
   console.log("workspace is", workspace);
+
+  const { setWorkspace } = useWorkspacePreferencesModal();
 
   const workspacemembers = workspace?.members;
 
@@ -33,6 +36,11 @@ export const WorkspacePanelHeader = ({ workspace }) => {
     "Logged In User Admin Of Workspace",
     isLoggedInUserAdminOfWorkspace
   );
+
+  useEffect(() =>{
+    setWorkspace(workspace);
+  })
+
 
   const { setOpenPreferences, setInitialValue } = useWorkspacePreferencesModal();
   

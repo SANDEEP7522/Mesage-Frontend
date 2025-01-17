@@ -4,7 +4,7 @@ import { deleteWorkspaceRequest } from '@/apis/workspaces';
 
 import { useAuth } from '@/hooks/context/useAuth';
 
-export const useDeleteWorkspace = (workspaceId) => {
+export const useDeleteWorkspace = ( workspaceId ) => {
 
     const { auth } = useAuth();
    
