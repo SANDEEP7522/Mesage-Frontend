@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { useUpdateWorkspace } from "@/hooks/apis/workspaces/useUpdateWorkspace";
 import { Button } from "@/components/ui/button";
-import { useConfirm } from "@/hooks/context/useConfirm";
+import { useConfirm } from "@/hooks/useConfirm";
 
 //  for editing workspace
 export const WorkspacePreferencesModal = () => {
