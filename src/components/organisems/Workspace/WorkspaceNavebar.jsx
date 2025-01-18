@@ -5,11 +5,23 @@ import { Button } from "@/components/ui/button";
 import { useGetWorkspaceById } from "@/hooks/apis/workspaces/useGetWorkspaceById";
 
 import { InfoIcon, LucideLoader2, SearchIcon } from "lucide-react";
+import { useCurrentWorkspace } from "@/hooks/context/useCurrentWorkspace";
+import { useEffect } from "react";
 
 export const WorkspaceNavbar = () => {
+  
   const { workspaceId } = useParams();
 
   const { isFetching, workspace } = useGetWorkspaceById(workspaceId);
+  
+  const { setCurrentWorkspace } = useCurrentWorkspace();
+
+  useEffect(() => {
+    if(workspace) {
+        setCurrentWorkspace(workspace);
+    }
+}, [workspace, setCurrentWorkspace]);
+
 
   if (isFetching) {
     return (

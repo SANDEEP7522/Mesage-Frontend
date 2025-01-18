@@ -1,12 +1,12 @@
 import { ChevronDownIcon, ListFilterIcon, SquarePenIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
-     Tooltip,
-     TooltipContent,
-     TooltipProvider,
-     TooltipTrigger,
-   } from "@/components/ui/tooltip"
-   
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,7 +29,8 @@ export const WorkspacePanelHeader = ({ workspace }) => {
   console.log("auth", auth);
 
   const isLoggedInUserAdminOfWorkspace = workspacemembers?.find(
-    (member) => member.memberId === auth?.user?._id && member.role === "admin"
+    (member) =>
+      member.memberId._id === auth?.user?._id && member.role === "admin"
   );
 
   console.log(
@@ -37,13 +38,13 @@ export const WorkspacePanelHeader = ({ workspace }) => {
     isLoggedInUserAdminOfWorkspace
   );
 
-  useEffect(() =>{
+  useEffect(() => {
     setWorkspace(workspace);
-  })
+  });
 
+  const { setOpenPreferences, setInitialValue } =
+    useWorkspacePreferencesModal();
 
-  const { setOpenPreferences, setInitialValue } = useWorkspacePreferencesModal();
-  
   return (
     <div className="flex items-center justify-between px-4 h-[50px] gap-0.5">
       <DropdownMenu>
@@ -68,8 +69,9 @@ export const WorkspacePanelHeader = ({ workspace }) => {
           </DropdownMenuItem>
           {isLoggedInUserAdminOfWorkspace && (
             <>
-              <DropdownMenuItem className="cursor-pointer py-2"
-                 onClick={() => {
+              <DropdownMenuItem
+                className="cursor-pointer py-2"
+                onClick={() => {
                   setInitialValue(workspace?.name);
                   setOpenPreferences(true);
                 }}
@@ -85,33 +87,31 @@ export const WorkspacePanelHeader = ({ workspace }) => {
         </DropdownMenuContent>
       </DropdownMenu>
       <div className="flex items-center gap-0.5">
-        
         <Button variant="transparent" size="iconSm">
           <TooltipProvider>
-               <Tooltip>
-                    <TooltipTrigger>
-                     <ListFilterIcon className="size-5" />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                     <p>Filter</p>
-                    </TooltipContent>
-               </Tooltip>
+            <Tooltip>
+              <TooltipTrigger>
+                <ListFilterIcon className="size-5" />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Filter</p>
+              </TooltipContent>
+            </Tooltip>
           </TooltipProvider>
-          </Button>
-     
-        <Button variant="transparent" size="iconSm">
-          <TooltipProvider>
-               <Tooltip>
-                    <TooltipTrigger>
-                     <SquarePenIcon className="size-5" />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                     <p> Preferense </p>
-                    </TooltipContent>
-               </Tooltip>
-          </TooltipProvider>
-          </Button>
+        </Button>
 
+        <Button variant="transparent" size="iconSm">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <SquarePenIcon className="size-5" />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p> Preferense </p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </Button>
       </div>
     </div>
   );

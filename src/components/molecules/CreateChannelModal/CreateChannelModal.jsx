@@ -13,41 +13,65 @@ import { Input } from "@/components/ui/input";
 
 import { useCreateChannelModal } from "@/hooks/context/useCreateChannelModal";
 
+import { useQueryClient } from "@tanstack/react-query";
+
+import { useToast } from "@/hooks/use-toast";
+import { useCurrentWorkspace } from "@/hooks/context/useCurrentWorkspace";
+import { useAddChannelToWorkspace } from "@/hooks/apis/workspaces/useAddChannelToWorkspace";
+
 export const CreateChannelModal = () => {
+  const { toast } = useToast();
+
+  const queryClient = useQueryClient();
 
   const { openCreateChannelModal, setOpenCreateChannelModal } =
     useCreateChannelModal();
 
- 
-   const [channelName, setChannelName] = useState("");
+  const [channelName, setChannelName] = useState("");
 
-   function handleClose() {
+  const { addChannelToWorkspaceMutation } = useAddChannelToWorkspace();
+
+  const { currentWorkspace } = useCurrentWorkspace();
+
+  function handleClose() {
     setOpenCreateChannelModal(false);
   }
 
-  function handleFormSubmit(e) {
+  async function handleFormSubmit(e) {
     e.preventDefault();
+    await addChannelToWorkspaceMutation({
+      workspaceId: currentWorkspace?._id,
+      channelName: channelName,
+    });
+    toast({
+      type: "success",
+      title: "Channel created successfully",
+    });
+    queryClient.invalidateQueries(
+      `fetchWorkspaceById-${currentWorkspace?._id}`
+    );
+    handleClose();
   }
 
   return (
     <Dialog open={openCreateChannelModal} onOpenChange={handleClose}>
-          <DialogContent>
-               <DialogHeader>
-                    <DialogTitle>Create a channel</DialogTitle>
-               </DialogHeader>
-               <form onSubmit={handleFormSubmit}>
-                    <Input
-                         value={channelName}
-                         onChange={(e) => setChannelName(e.target.value)}
-                         minLength={3}
-                         placeholder="Channel Name e.g. team-announcements"
-                         required
-                    />
-                    <div className="flex justify-end mt-4">
-                     <Button>Create Channel</Button>
-                    </div>
-               </form>
-          </DialogContent>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Create a channel</DialogTitle>
+        </DialogHeader>
+        <form onSubmit={handleFormSubmit}>
+          <Input
+            value={channelName}
+            onChange={(e) => setChannelName(e.target.value)}
+            minLength={3}
+            placeholder="Channel Name e.g. team-announcements"
+            required
+          />
+          <div className="flex justify-end mt-4">
+            <Button>Create Channel</Button>
+          </div>
+        </form>
+      </DialogContent>
     </Dialog>
   );
 };
