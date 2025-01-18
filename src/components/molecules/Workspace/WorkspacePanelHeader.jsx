@@ -16,7 +16,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/hooks/context/useAuth";
 import { useWorkspacePreferencesModal } from "@/hooks/context/WorkspacePreferencesModalContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { WorkspaceInviteModal } from "@/components/organisems/Modals/WorkspaceInviteModal";
 export const WorkspacePanelHeader = ({ workspace }) => {
   console.log("workspace is", workspace);
 
@@ -27,6 +28,8 @@ export const WorkspacePanelHeader = ({ workspace }) => {
   const { auth } = useAuth();
 
   console.log("auth", auth);
+
+  const [openInviteModal, setOpenInviteModal] = useState(false);
 
   const isLoggedInUserAdminOfWorkspace = workspacemembers?.find(
     (member) =>
@@ -46,6 +49,15 @@ export const WorkspacePanelHeader = ({ workspace }) => {
     useWorkspacePreferencesModal();
 
   return (
+     <>
+     
+     <WorkspaceInviteModal 
+                openInviteModal={openInviteModal}
+                setOpenInviteModal={setOpenInviteModal}
+                workspaceName={workspace?.name}
+                joinCode={workspace?.joinCode}
+            />
+     
     <div className="flex items-center justify-between px-4 h-[50px] gap-0.5">
       <DropdownMenu>
         <DropdownMenuTrigger>
@@ -79,7 +91,9 @@ export const WorkspacePanelHeader = ({ workspace }) => {
                 Preferences
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="cursor-pointer py-2">
+              <DropdownMenuItem 
+               onClick={() => {setOpenInviteModal(true);}}
+              className="cursor-pointer py-2">
                 Invite people to {workspace?.name}
               </DropdownMenuItem>
             </>
@@ -114,5 +128,7 @@ export const WorkspacePanelHeader = ({ workspace }) => {
         </Button>
       </div>
     </div>
+    </>
+
   );
 };
