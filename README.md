@@ -41,3 +41,10 @@ npm i @tanstack/react-query
 
 Atom Design : ![Link](https://medium.com/@janelle.wg/atomic-design-pattern-how-to-structure-your-react-application-2bb4d9ca5f97)
 
+
+## react-verification-input
+
+it is a customizable, masked input that can be used to enter all sorts of codes e.g. security codes when two-factor authenticating. Also I'm sure you can think of many more creative use cases.
+
+-> npm i react-verification-input
+
