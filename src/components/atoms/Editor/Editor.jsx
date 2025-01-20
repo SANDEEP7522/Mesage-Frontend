@@ -1,3 +1,5 @@
+import 'quill/dist/quill.snow.css';
+
 import Quill from "quill";
 
 import { useEffect, useRef, useState } from "react";
@@ -17,8 +19,8 @@ export const Editor = ({
 
   // all refs are controlled refresh components
   const containerRef = useRef(); // reqd to initialize the editor 
-  const submitRef = useRef();
-  const disabledRef = useRef();
+ // const submitRef = useRef();
+ // const disabledRef = useRef();
   const defaultValueRef = useRef();
   const quillRef = useRef();
   const placeholderRef = useRef();
@@ -41,10 +43,11 @@ export const Editor = ({
       modules: {
   
         toolbar: [
-          ["bold", "italic", "underline", "strike"],
+          ["bold", "italic", "underline", "strike", 'code-block'],
           ["link", "image"],
-          [{ list: "ordered" }, { list: "bullet" }],
+          [{ list: "ordered" }, { list: "bullet" }, { 'list': 'check' } ],
           ["clean"],
+       
         ],
 
         keyboard: {
@@ -89,6 +92,12 @@ export const Editor = ({
       >
         <div ref={containerRef} />
       </div>
+      <p
+      className='text-sm text-slate-400 p-2  text-muted-forground flex justify-end'
+      >
+     <strong>Shift + return</strong> &nbsp;
+       to add new line
+      </p>
     </div>
   );
 };

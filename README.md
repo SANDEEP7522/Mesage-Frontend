@@ -59,3 +59,6 @@ Quill is a free, open source WYSIWYG editor built for the modern web. With its m
 Quill is a modern rich text editor built for compatibility and extensibility. It was created by Jason Chen and Byron Milligan and actively maintained by Slab.
 
 -> npm i quill
+
+ ## css Combinators
+The final selectors we will look at are called combinators. Combinators are used to combine other selectors in a way that allows us to select elements based on their location in the DOM relative to other elements (for example, child or sibling).
