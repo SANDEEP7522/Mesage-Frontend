@@ -1,4 +1,5 @@
 
+import { ChannelHeader } from "@/components/molecules/ChannelHeader/ChannelHeader";
 import { ChatInput } from "@/components/molecules/ChatInput/ChatInput";
 import { useGetChannelById } from "@/hooks/apis/channels/useGetChannelById";
 
@@ -31,6 +32,7 @@ export const Channel = () => {
 
     
     <div className="flex flex-col h-full">
+        <ChannelHeader name={channelDetails?.name} />
       <div className="flex-1" />
       
       <ChatInput />
