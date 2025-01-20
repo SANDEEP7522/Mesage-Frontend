@@ -27,7 +27,8 @@ export const UserItem = ({
     console.log('Image URL:', image);
     
     const { workspace } = useCurrentWorkspace();
-    
+    const avatar = image || `https://robohash.org/${id}?set=set2`;
+
     return (
         <Button
             className={cn(userItemVariants({variant}))}
@@ -37,7 +38,7 @@ export const UserItem = ({
         >
             <Link to={`/workspace/${workspace?._id}/members/${id}`}>
                 <Avatar>
-                    <AvatarImage src={image} 
+                    <AvatarImage src={avatar} 
                     className="rounded-md w-8 h-8"  />
                     <AvatarFallback
                         className='rounded-md bg-sky-500 text-white'

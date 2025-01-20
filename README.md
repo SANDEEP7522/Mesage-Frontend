@@ -48,3 +48,14 @@ it is a customizable, masked input that can be used to enter all sorts of codes 
 
 -> npm i react-verification-input
 
+ ## Your powerful rich text editor.(Quill Rich Text Editor)
+  
+  [Link] (https://quilljs.com/)
+
+Quill Rich Text Editor
+
+Quill is a free, open source WYSIWYG editor built for the modern web. With its modular architecture and expressive API, it is completely customizable to fit any need.   
+
+Quill is a modern rich text editor built for compatibility and extensibility. It was created by Jason Chen and Byron Milligan and actively maintained by Slab.
+
+-> npm i quill
