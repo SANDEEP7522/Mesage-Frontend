@@ -138,7 +138,10 @@ export const Editor = ({
                             className='ml-auto bg-[#007a6a] hover-bg-[#007a6a]/90'
                             disabled={false}
                             onClick={() => {
-                              onSubmit({ body: JSON.stringify(quillRef.current?.getContents())});
+                             // onSubmit({ body: JSON.stringify(quillRef.current?.getContents())});
+                              const messageContent = JSON.stringify(quillRef.current?.getContents());
+                              onSubmit({ body: messageContent });
+                              quillRef.current?.setText('');
                               
                             }}
                         >
