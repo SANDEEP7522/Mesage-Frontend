@@ -7,8 +7,12 @@ import { useEffect, useRef, useState } from "react";
 import { PiTextAa } from 'react-icons/pi';
 
 import { Button } from '@/components/ui/button';
+
 import { Hint } from '../Hint/Hint';
+
 import { ImageIcon } from 'lucide-react';
+
+import { MdSend } from 'react-icons/md';
 
 export const Editor = ({
   variant = "create",
@@ -126,6 +130,19 @@ export const Editor = ({
                             onClick={() => {}}
                         >
                             <ImageIcon className='size-4' />
+                        </Button>
+                    </Hint>    
+                    <Hint label="Send">
+                        <Button
+                            size="iconSm"
+                            className='ml-auto bg-[#007a6a] hover-bg-[#007a6a]/90'
+                            disabled={false}
+                            onClick={() => {
+                              onSubmit({ body: JSON.stringify(quillRef.current?.getContents())});
+                              
+                            }}
+                        >
+                            <MdSend className='size-4' />
                         </Button>
                     </Hint>    
           </div>
