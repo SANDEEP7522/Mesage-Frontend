@@ -62,3 +62,10 @@ Quill is a modern rich text editor built for compatibility and extensibility. It
 
  ## css Combinators
 The final selectors we will look at are called combinators. Combinators are used to combine other selectors in a way that allows us to select elements based on their location in the DOM relative to other elements (for example, child or sibling).
+
+
+## Sockit.io for message
+
+The Socket.IO client library enables real-time communication between the components of your application, allowing your users to interact with each other in real-time.
+
+-> npm i socket.io-client
