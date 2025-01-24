@@ -1,6 +1,5 @@
 import { MessageRenderer } from '@/components/atoms/MessageRenderer/MessageRenderer';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-
 export const Message = ({
     authorImage,
     authorName,
@@ -10,7 +9,6 @@ export const Message = ({
 }) => {
     // Avatar fallback: If `authorImage` is not provided, use a generated avatar from robohash.
     const avatar = authorImage || `https://robohash.org/${id}?set=set2`;
-
     return (
         <div className="flex flex-col gap-2 p-1.5 px-5 hover:bg-gray-100/60 group relative">
             <div className="flex items-center gap-2">

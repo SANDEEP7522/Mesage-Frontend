@@ -8,7 +8,7 @@ import { useSocket } from "@/hooks/context/useSockit";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { Loader2Icon, TriangleAlertIcon } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import { useParams } from "react-router-dom";
 
@@ -17,13 +17,22 @@ export const Channel = () => {
 
   const queryClient = useQueryClient();
 
-  const { channelDetails, isFetching, isError } = useGetChannelById(channelId);
+  const messageContainerListRef = useRef(null);
 
   const { joinChannel } = useSocket();
+
+  const { channelDetails, isFetching, isError } = useGetChannelById(channelId);
 
   const { messages, isSuccess } = useGetChannelMessages(channelId);
 
   const { setMessageList, messageList } = useChannelMessages();
+
+  useEffect(() => {
+    if (messageContainerListRef.current) {
+      messageContainerListRef.current.scrollTop =
+        messageContainerListRef.current.scrollHeight;
+    }
+  }, [messageList]);
 
   useEffect(() => {
     console.log("ChannelId", channelId);
@@ -63,17 +72,23 @@ export const Channel = () => {
     <div className="flex flex-col h-full">
       <ChannelHeader name={channelDetails?.name} />
 
-      {messageList?.map((message) => {
-        return (
-          <Message
-            key={message._id}
-            body={message.body}
-            authorImage={message.senderId?.avatar}
-            authorName={message.senderId?.username}
-            createdAt={message.createdAt}
-          />
-        );
-      })}
+      {/* We need to make sure that below div is scrollable for the messages */}
+      <div
+        ref={messageContainerListRef}
+        className="flex-5 overflow-y-auto p-5 gap-y-2"
+      >
+        {messageList?.map((message) => {
+          return (
+            <Message
+              key={message._id}
+              body={message.body}
+              authorImage={message.senderId?.avatar}
+              authorName={message.senderId?.username}
+              createdAt={message.createdAt}
+            />
+          );
+        })}
+      </div>
 
       <div className="flex-1" />
 
@@ -81,4 +96,3 @@ export const Channel = () => {
     </div>
   );
 };
-
