@@ -77,7 +77,7 @@ export const Channel = () => {
         ref={messageContainerListRef}
         className="flex-5 overflow-y-auto p-5 gap-y-2"
       >
-        {messageList?.map((message) => {
+        {messageList?.reverse().map((message) => {
           return (
             <Message
               key={message._id}
@@ -85,6 +85,7 @@ export const Channel = () => {
               authorImage={message.senderId?.avatar}
               authorName={message.senderId?.username}
               createdAt={message.createdAt}
+              image={message.image}
             />
           );
         })}

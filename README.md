@@ -69,3 +69,5 @@ The final selectors we will look at are called combinators. Combinators are used
 The Socket.IO client library enables real-time communication between the components of your application, allowing your users to interact with each other in real-time.
 
 -> npm i socket.io-client
+
+## AWS for uploging image (s3) bugget

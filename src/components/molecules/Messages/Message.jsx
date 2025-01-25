@@ -1,3 +1,4 @@
+import { MessageImageThumbnail } from '@/components/atoms/MessageImageThumbnail/MessageImageThumbnail';
 import { MessageRenderer } from '@/components/atoms/MessageRenderer/MessageRenderer';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 export const Message = ({
@@ -6,6 +7,7 @@ export const Message = ({
     createdAt,
     body,
     id,  // Assuming id is passed down for avatar fallback
+    image,
 }) => {
     // Avatar fallback: If `authorImage` is not provided, use a generated avatar from robohash.
     const avatar = authorImage || `https://robohash.org/${id}?set=set2`;
@@ -32,6 +34,11 @@ export const Message = ({
                     </div>
                     {/* Render message content */}
                     <MessageRenderer value={body || 'No message provided'} />
+
+                    {/* any image if there are */}
+
+                   { image && <MessageImageThumbnail url={image} />}
+
                 </div>
             </div>
         </div>
