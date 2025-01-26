@@ -4,16 +4,16 @@ import { useEffect, useRef, useState } from "react";
 
 export const MessageRenderer = ({ value }) => {
 
-     console.log("Value: ", value);
+   //  console.log("Value: ", value);
 
      const rendererRef = useRef(null);
     
      const [isEmpty, setIsEmpty] = useState(false);
     
      useEffect(() => {
-     console.log("Renderer Ref: ", rendererRef.current);
+    // console.log("Renderer Ref: ", rendererRef.current);
      if (!rendererRef.current) return;
-     console.log("Value: ", value);
+     //console.log("Value: ", value);
      const quill = new Quill(document.createElement("div"), {
           theme: "snow",
      });
