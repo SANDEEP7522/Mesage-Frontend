@@ -12,7 +12,7 @@ export const Payments = () => {
 
   async function handleFormSubmit(event) {
     event.preventDefault();
-    const response = await createOrderMutation(amount);
+    const response = await createOrderMutation(amount*100);
     console.log("form submit", response);
     
     setOrderResponse(response);
@@ -45,7 +45,7 @@ export const Payments = () => {
             {isSuccess && (
               <RanderRazorpayPopup
                 amount={amount * 100}
-                orderId={orderResponse.id}
+                orderId={orderResponse?.id}
                 keyId={import.meta.env.VITE_RAZORPAY_KEY_ID}
                 currency={"INR"}
               />

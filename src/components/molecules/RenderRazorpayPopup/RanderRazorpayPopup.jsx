@@ -24,10 +24,10 @@ export const RanderRazorpayPopup = ({
   amount,
 }) => {
 
-//   console.log('Render Razorpay Popup orderId', orderId);
+  console.log('Render Razorpay Popup orderId', orderId);
   console.log('Render Razorpay Popup  keyId',  keyId);
-//   console.log('Render Razorpay Popup currency', currency);
-//   console.log('Render Razorpay Popup  amount', amount);
+  console.log('Render Razorpay Popup currency', currency);
+  console.log('Render Razorpay Popup  amount', amount);
 
 
   const display = async (options) => {
