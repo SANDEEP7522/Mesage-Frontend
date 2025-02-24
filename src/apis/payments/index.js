@@ -5,11 +5,11 @@ export const createOrderRequest = async ({ token, amount }) => {
     const response = await axios.post(
       "/payments/order",
       {
-        amount
+        amount,
       },
       {
         headers: {
-          "x-access-token": token
+          "x-access-token": token,
         },
       }
     );
@@ -20,22 +20,30 @@ export const createOrderRequest = async ({ token, amount }) => {
   }
 };
 
-export const capturePaymentRequest = async ({ token, orderId, status, paymentId, signature }) => {
+export const capturePaymentRequest = async ({
+  token,
+  orderId,
+  status,
+  paymentId,
+}) => {
   try {
-      console.log('Capture payment request', orderId, status, paymentId);
-      const response = await axios.post('/payments/capture', {
-          orderId,
-          status,
-          paymentId,
-          signature
-      }, {
-          headers: {
-              'x-access-token': token
-          }
-      });
-      console.log(response);
-      return response?.data?.data;
+    console.log("Capture payment request", orderId, status, paymentId);
+    const response = await axios.post(
+      "/payments/capture",
+      {
+        orderId,
+        status,
+        paymentId,
+      },
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+    console.log(response);
+    return response?.data?.data;
   } catch (error) {
-      console.log('Error in capturing payment', error);
+    console.log("Error in capturing payment", error);
   }
-}
+};

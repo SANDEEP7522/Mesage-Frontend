@@ -1,69 +1,73 @@
-
-import { useEffect } from "react";
+import { useCaptureOrder } from "@/hooks/apis/payments/useCaptureOrder";
+import { useEffect, useState } from "react";
 
 const loadRazorpayScript = (src) => {
   return new Promise((res, rej) => {
-      const script = document.createElement('script');
-      script.src = src;
-      script.onload = () => {
-          console.log('Razorpay script loaded');
-          res(true);
-      };
-      script.onerror = () => {
-          console.log('Error in loading Razorpay script');
-          res(false);
-      };
-      document.body.appendChild(script);
-  })
-}
+    const script = document.createElement("script");
+    script.src = src;
+    script.onload = () => {
+      console.log("Razorpay script loaded");
+      res(true);
+    };
+    script.onerror = () => {
+      console.log("Error in loading Razorpay script");
+      res(false);
+    };
+    document.body.appendChild(script);
+  });
+};
 
-export const RanderRazorpayPopup = ({ 
-  orderId,
-  keyId,
-  currency,
-  amount,
-}) => {
+export const RanderRazorpayPopup = ({ orderId, keyId, currency, amount }) => {
+  console.debug("Render Razorpay Popup", { orderId, keyId, currency, amount });
 
-  console.log('Render Razorpay Popup orderId', orderId);
-  console.log('Render Razorpay Popup  keyId',  keyId);
-  console.log('Render Razorpay Popup currency', currency);
-  console.log('Render Razorpay Popup  amount', amount);
-
+  const { captureOrderMutation } = useCaptureOrder();
 
   const display = async (options) => {
-      const scriptResponse = await loadRazorpayScript('https://checkout.razorpay.com/v1/checkout.js');
-      if(!scriptResponse) {
-          console.log('Error in loading script');
-          return;
-      }
+    const scriptResponse = await loadRazorpayScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+    if (!scriptResponse) {
+      console.log("Error in loading script");
+      return;
+    }
 
-      const rzp = new window.Razorpay(options);
+    const razorpay = new window.Razorpay(options);
 
+    razorpay.on("payment.failed", async function (response) {
+      console.log("Payment failed", response.error.code);
+      await captureOrderMutation({
+        orderId: options.order_id,
+        status: "failed",
+        paymentId: "",
+      });
+    });
 
-      rzp.open();
-  }
+    razorpay.open();
+  };
 
   useEffect(() => {
+    display({
+      key: keyId,
+      amount,
+      currency,
+      name: "Sahuji", // name of the company
+      description: "Test Transaction",
+      order_id: orderId,
+      // callback_url:'http://localhost:7070/api/v1/payments/capture',
+      handler: async (response) => {
+        console.log("Payment success successfully", response);
+        await captureOrderMutation({
+          orderId,
+          status: "success",
+          paymentId: response.razorpay_payment_id,
+        });
+         // redirect to success page
 
-     if (!keyId) {
-          console.error("Razorpay key is missing");
-          return null;
-        }
-
-      display({
-          key: keyId,
-          amount,
-          currency,
-          name: "Sahuji", // name of the company
-          description: "Test Transaction",
-          order_id: orderId,
-          // callback_url:'http://localhost:7070/api/v1/payments/capture',
-          handler: (response) => {
-              console.log('Payment success', response);
-           }
-      })
-      
-  }, []); 
+      },
+    });
+  }, [orderId]);
 
   return null;
-}
+};
+
+
