@@ -56,10 +56,13 @@ export const RanderRazorpayPopup = ({ orderId, keyId, currency, amount }) => {
       // callback_url:'http://localhost:7070/api/v1/payments/capture',
       handler: async (response) => {
         console.log("Payment success successfully", response);
+        console.log('signature', response.razorpay_signature);
+        
         await captureOrderMutation({
           orderId,
           status: "success",
           paymentId: response.razorpay_payment_id,
+          signature: response.razorpay_signature,
         });
          // redirect to success page
 

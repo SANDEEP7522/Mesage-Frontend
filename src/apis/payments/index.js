@@ -25,15 +25,17 @@ export const capturePaymentRequest = async ({
   orderId,
   status,
   paymentId,
+  signature,
 }) => {
   try {
-    console.log("Capture payment request", orderId, status, paymentId);
+    console.log("Capture payment request", orderId, status, paymentId, signature);
     const response = await axios.post(
       "/payments/capture",
       {
         orderId,
         status,
         paymentId,
+        signature,
       },
       {
         headers: {
