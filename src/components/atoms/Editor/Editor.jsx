@@ -13,6 +13,8 @@ import { Hint } from '../Hint/Hint';
 import { ImageIcon, XIcon } from 'lucide-react';
 
 import { MdSend } from 'react-icons/md';
+import { FaPaypal } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export const Editor = ({
   variant = "create",
@@ -151,8 +153,19 @@ export const Editor = ({
                             onClick={() => { imageInputRef.current.click(); }}
                         >
                             <ImageIcon className='size-4' />
-                        </Button>
+                        </Button>   
                     </Hint>  
+                    <Hint label="Pay">
+                      <Link to='/makepayment'>
+                      <Button 
+                        size="iconSm"
+                        variant="ghost"
+                        disabled={false}
+                      >
+                        <FaPaypal size={40} color="blue" />
+                        </Button>
+                        </Link>
+                    </Hint>
 
                     <input 
                         type="file"
